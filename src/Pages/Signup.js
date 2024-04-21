@@ -59,7 +59,7 @@ export default function Signup() {
     
     setErrors(newErrors);
 
-    axios.post('http://localhost:5000/register', { username, name, email, mob, pass })
+    axios.post('https://alphaclothing.onrender.com/register', { username, name, email, mob, pass })
       .then(result => {
         console.log(result);
         window.alert("Signed Up successfully");
