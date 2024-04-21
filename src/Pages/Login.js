@@ -14,7 +14,7 @@ export default function Login() {
         const pass = e.target.pass.value;
         console.log(username);
         console.log(pass);
-        axios.post('http://localhost:5000/login',{username,pass})
+        axios.post('https://alphaclothing.onrender.com/login',{username,pass})
         .then(result => {
             console.log(result)
             if(result.data === "Success"){
