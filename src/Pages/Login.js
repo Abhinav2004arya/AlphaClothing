@@ -17,10 +17,13 @@ export default function Login() {
         const pass = e.target.pass.value;
         console.log(username);
         console.log(pass);
+<<<<<<< HEAD
 
 
         
         setIsLoading(true);
+=======
+>>>>>>> b9fea8fbfeed35903cd90b718bba7ef06b0b13f7
         axios.post('https://alphaclothing.onrender.com/login',{username,pass})
         .then(result => {
             console.log(result)
