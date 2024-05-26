@@ -4,19 +4,20 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 export default function Profile() {
 
-    // const [userData, setUserData] = useState(null);
-    // const { username } = useParams(); // Fetch the username from URL parameters
+    const [userData, setUserData] = useState(null);
+    const { username } = useParams(); // Fetch the username from URL parameters
 
-    // useEffect(() => {
-    //     // Fetch user data when the component mounts
-    //     axios.get(`http://localhost:5000/user/${username}`)
-    //         .then(response => {
-    //             setUserData(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching user data:', error);
-    //         });
-    // }, [username]);
+    useEffect(() => {
+        // Fetch user data when the component mounts
+        axios.get(`http://localhost:5000/user/Abhi123@`)
+            .then(response => {
+                setUserData(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    }, [username]);
+    console.log(userData);
 
 
   return (

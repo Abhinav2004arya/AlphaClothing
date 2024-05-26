@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import './signup.css';
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 export default function Signup() {
   const [errors, setErrors] = useState({});
   const navigation = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   
   function clearErrors() {
     setErrors({});
@@ -59,14 +62,17 @@ export default function Signup() {
     
     setErrors(newErrors);
 
-    axios.post('http://localhost:5000/register', { username, name, email, mob, pass })
-      .then(result => {
-        console.log(result);
-        window.alert("Signed Up successfully");
-        navigation("/login");
-      })
-      .catch(err => console.log(err));
     if (Object.keys(newErrors).length === 0) {
+      setIsLoading(true);
+      axios.post('https://alphaclothing.onrender.com/register', { username, name, email, mob, pass })
+        .then(result => {
+          console.log(result);
+          window.alert("Signed Up successfully");
+          navigation("/login");
+          
+        })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(false));
 
     }
 
@@ -74,6 +80,7 @@ export default function Signup() {
 
   return (
     <div className='lbody'>
+      {isLoading && <Loading />}
       <div className='lcontainer'>
         <h1> Sign Up </h1>
         <form onSubmit={handleSubmit}>
@@ -84,7 +91,7 @@ export default function Signup() {
           <span className='error'>{errors.name}</span>
 
             <input type="text" placeholder="Email-id" name=" email" id="email"/><span class="error" >{errors.email}</span>
-            <input type="tel" placeholder="Mobile no."  name=" mob" id="mob" /><span class="error" >{errors.mobile}</span>
+            <input type="tel" placeholder="Mobile no."  name=" mob" id="mob" /><span class="error" >{errors.mob}</span>
             <input type="password" placeholder="password" name=" pass" id="pass"/><span class="error" >{errors.pass}</span>
             <input type="password" placeholder="Re-Enter Password" name=" rpass" id="rpass"/><span class="error" >{errors.repass}</span>
 
@@ -97,6 +104,7 @@ export default function Signup() {
           </div>
           <input type='submit' value='Sign Up' className='sub' />
           <div className='register'>
+          
             Already have an account? <Link to='/login'>Login Here</Link>
           </div>
         </form>
